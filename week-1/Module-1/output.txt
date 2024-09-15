@@ -1,6 +1,6 @@
-0 1 1 1 1 1 
-0 0 1 0 1 1 
-0 0 0 1 0 0 
-0 0 0 0 0 0 
-0 0 1 0 0 0 
-0 0 0 1 0 0 
+Index - 0 values = 4 2 3 5 1 
+Index - 1 values = 2 4 5 
+Index - 2 values = 3 
+Index - 3 values = 
+Index - 4 values = 2 
+Index - 5 values = 3 
