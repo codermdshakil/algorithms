@@ -8,7 +8,7 @@ vector<int> v[1005];
 
 bool visit[1005];
 
-// bsf or breath search first
+// bsf (breath search first) to traverse graph values
 void bsf(int src)
 {
     // create a queue
