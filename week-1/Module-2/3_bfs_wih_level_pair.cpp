@@ -63,7 +63,7 @@ int main()
     // set inisial values false of visit array
     memset(visit, false, sizeof(visit));
 
-    bsf(src, 9);
+    bsf(src, 4);
 
     return 0;
 }
