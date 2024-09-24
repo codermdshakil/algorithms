@@ -34,15 +34,21 @@ int main()
 
     memset(visit, false, sizeof(visit));
 
-    // just for if i want to traverse both components then just use like this 
+    // just for if i want to traverse both components then just use like this
+    int c = 0;
 
     for (int i = 0; i < n; i++)
     {
         if (visit[i] == false)
         {
             dfs(i);
+            c++;
         }
     }
+
+    cout << endl;
+    // we can check how many component here
+    cout << "Component - " << c << endl;
 
     return 0;
 }
