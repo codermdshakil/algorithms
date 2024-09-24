@@ -5,7 +5,7 @@ char a[20][20];
 bool visit[20][20];
 
 // to move right left up down
-vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+vector<pair<int, int>> d = {{0,        1}, {0, -1}, {-1, 0}, {1, 0}};
 
 int n, m;
 
