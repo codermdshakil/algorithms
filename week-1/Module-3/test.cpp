@@ -31,7 +31,6 @@ void dfs(int si, int sj)
         if (valid(ci, cj) == true && visit[ci][cj] == false)
         {
             dfs(ci, cj);
-            visit[ci][cj];
         }
     }
 }
