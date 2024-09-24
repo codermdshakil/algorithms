@@ -24,6 +24,7 @@ void bfs(int si, int sj)
     queue<pair<int, int>> q;
     q.push({si, sj});
     visit[si][sj] = true;
+    dis[si][sj] = 0;
     while (!q.empty())
     {
         pair<int, int> par = q.front();
