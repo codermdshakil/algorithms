@@ -7,15 +7,15 @@ int main()
     int n, e;
     cin >> n >> e;
 
-    int adj_mat[n][n];
+    int adjeccency_matrix[n][n];
 
-    memset(adj_mat, 0, sizeof(adj_mat));
+    memset(adjeccency_matrix, 0, sizeof(adjeccency_matrix));
 
     while (e--)
     {
         int a, b;
         cin >> a >> b;
-        adj_mat[a][b] = 1;
+        adjeccency_matrix[a][b] = 1;
     }
 
     int q;
@@ -24,12 +24,17 @@ int main()
     {
         int a, b;
         cin >> a >> b;
-        if (adj_mat[a][b] == 1)
+        if (adjeccency_matrix[a][b] == 1)
+        {
+            cout << "YES" << endl;
+        }
+        else if (a == b)
         {
             cout << "YES" << endl;
         }
         else
         {
+
             cout << "NO" << endl;
         }
     }
