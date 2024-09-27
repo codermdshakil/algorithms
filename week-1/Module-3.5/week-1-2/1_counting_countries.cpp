@@ -10,7 +10,7 @@ int dy[4] = {0, 1, 0, -1}; // coloum move
 
 bool valid(int ci, int cj)
 {
-    if (ci >= 0 && ci < n && cj >= 0 && cj < m  && graph[ci][cj] == '.')
+    if (ci >= 0 && ci < n && cj >= 0 && cj < m && graph[ci][cj] == '.')
     {
         return true;
     }
@@ -28,7 +28,7 @@ void dfs(int si, int sj)
         int ci = si + dx[i]; // children row
         int cj = sj + dy[i]; // children colum
 
-        if (visit[ci][cj] == false && valid(ci, cj) == true )
+        if (visit[ci][cj] == false && valid(ci, cj) == true)
         {
             visit[ci][cj] = true;
             dfs(ci, cj);
@@ -50,17 +50,22 @@ int main()
         }
     }
 
-    dfs(0,0);
+    int countery_count = 0;
 
-    // chech which matrix items i can visit
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            cout << visit[i][j];
+            // if indexs are valid and matrix elements are not visited
+            if (valid(i, j) && visit[i][j] == false)
+            {
+                dfs(i, j);
+                countery_count++;
+            }
         }
-        cout << endl;
     }
+
+    cout << countery_count << endl;
 
     return 0;
 }
