@@ -6,7 +6,6 @@ char graph[1001][1001];
 
 // visited mat to check item visited or not
 bool visit[1001][1001];
-int dis[1001][1001];
 
 // to move x wais
 int dx[4] = {-1, 0, 1, 0};
@@ -38,16 +37,15 @@ void bfs(int si, int sj)
 
     q.push({si, sj});
     visit[si][sj] = true;
-    dis[si][sj] = 0;
 
     while (!q.empty())
     {
         // ber kora
-        pair<int, int> p = q.front();
+        pair<int, int> node = q.front();
         q.pop();
 
-        int first = p.first;
-        int second = p.second;
+        int row = node.first;
+        int col = node.second;
 
         // kaj kora
         // cout << first << " " << second << endl;
@@ -55,15 +53,14 @@ void bfs(int si, int sj)
         // children push kora
         for (int i = 0; i < 4; i++)
         {
-            int ci = first + dx[i]; // children row
-            int cj = second + dy[i]; // children col
+            int ci = row + dx[i]; // children row
+            int cj = col + dy[i]; // children col
 
             // check valid index and visit false
             if (visit[ci][cj] == false && valid(ci, cj) == true)
             {
                 q.push({ci, cj});
                 visit[ci][cj] = true;
-                dis[ci][cj] = dis[first][second] + 1;
             }
         }
     }
