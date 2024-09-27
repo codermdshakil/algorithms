@@ -70,8 +70,8 @@ int main()
     {
         for (int j = 0; j < m; j++)
         {
-            // check country has and not visited
-            if (graph[i][j] == '.' && visit[i][j] == false)
+            // check country has and not visited and valid(i, j) == true [optional]
+            if (graph[i][j] == '.' && visit[i][j] == false && valid(i, j) == true)
             {
                 dfs(i, j);
                 country_count++;
