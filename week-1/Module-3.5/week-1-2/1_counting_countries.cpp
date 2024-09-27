@@ -50,14 +50,14 @@ int main()
         }
     }
 
+    // country_counting
     int countery_count = 0;
-
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            // if indexs are valid and matrix elements are not visited
-            if (valid(i, j) && visit[i][j] == false)
+            // if country using '.' and matrix elements are not visited
+            if (graph[i][j] == '.' && visit[i][j] == false)
             {
                 dfs(i, j);
                 countery_count++;
