@@ -38,6 +38,9 @@ void dfs(int si, int sj)
 
 int main()
 {
+    // . means Country
+    // ~ means Water
+
     cin >> n >> m;
     for (int i = 0; i < n; i++)
     {
@@ -50,7 +53,6 @@ int main()
     dfs(0,0);
 
     // chech which matrix items i can visit
-
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
