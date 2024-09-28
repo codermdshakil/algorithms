@@ -7,32 +7,22 @@ bool visit[N];
 int parentArray[N];
 bool ans;
 
-void bfs(int s)
+void dfs(int parent)
 {
-    queue<int> q;
-    q.push(s);
-    visit[s] = true;
+    visit[parent] = true;
+    // cout << parent << " ";
 
-    while (!q.empty())
+    for (int child : adj[parent])
     {
-        int parent = q.front();
-        q.pop();
-
-        // cout << parent << " ";
-
-        for (int child : adj[parent])
+        // cycle detect  logic
+        if (visit[child] == true && parentArray[parent] != child)
         {
-            // Cycle detect logic
-            if (visit[child] == true && parentArray[parent] != child)
-            {
-                ans = true;
-            }
-            if (visit[child] == false)
-            {
-                q.push(child);
-                parentArray[child] = parent;
-                visit[child] = true;
-            }
+            ans = true;
+        }
+        if (visit[child] == false)
+        {
+            parentArray[child] = parent;
+            dfs(child);
         }
     }
 }
@@ -61,11 +51,11 @@ int main()
     {
         if (!visit[i])
         {
-            bfs(i);
+            dfs(i);
         }
     }
 
-    // print output
+     // print output
     if (ans)
     {
         cout << "Cycle Found" << endl;

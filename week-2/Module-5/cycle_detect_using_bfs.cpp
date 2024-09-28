@@ -9,7 +9,7 @@ int parentArray[N];
 
 bool ans;
 
-void bfs(int s)
+void dfs(int s)
 {
     queue<int> q;
     q.push(s);
@@ -63,7 +63,7 @@ int main()
     {
         if (!visit[i])
         {
-            bfs(i);
+            dfs(i);
         }
     }
 
