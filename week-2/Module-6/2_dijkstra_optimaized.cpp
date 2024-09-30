@@ -9,16 +9,27 @@ vector<pair<int, int>> v[N];
 // distance array to store distance
 int dis[N];
 
+// compare class asseding order based on second values
+class cmp
+{
+public:
+    bool operator()(pair<int, int> a, pair<int, int> b)
+    {
+        // sort asseding order based on secon value
+        return a.second > b.second;
+    }
+};
+
 void dijkstra(int src)
 {
-    queue<pair<int, int>> q;
-    q.push({src, 0});
+    priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
+    pq.push({src, 0});
     dis[src] = 0;
 
-    while (!q.empty())
+    while (!pq.empty())
     {
-        pair<int, int> parent = q.front();
-        q.pop();
+        pair<int, int> parent = pq.top();
+        pq.pop();
 
         int parentNode = parent.first;
         int parentCost = parent.second;
@@ -32,7 +43,7 @@ void dijkstra(int src)
             {
                 // path relax
                 dis[childNode] = parentCost + childCost;
-                q.push({childNode, dis[childNode]});
+                pq.push({childNode, dis[childNode]});
             }
         }
     }
@@ -57,6 +68,7 @@ int main()
     {
         dis[i] = INT_MAX;
     }
+ 
 
     dijkstra(0);
 
@@ -68,4 +80,4 @@ int main()
     return 0;
 }
 
-// Time complexity of Dijkstra Naive version - O(V*E)
+// Time complexity of dijkstra optimaized version - O(V+E) * log v  or  (ElogV);
