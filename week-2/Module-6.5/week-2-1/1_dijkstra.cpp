@@ -1,16 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const long long int INF = 1e18;
+
 int nodes, edges;
 
 // cost/weight , value store
 vector<pair<int, int>> adj[100005];
 
 // distance array
-int dis[100005];
+long long int dis[100005];
 
 // track children parent
-int parent[100005];
+long long int parent[100005];
+
+bool vis[100005];
 
 void dijkstra(int src)
 {
@@ -27,6 +31,9 @@ void dijkstra(int src)
         pq.pop();
         int parentCost = par.first;
         int parentNode = par.second;
+
+        // parent node visited
+        vis[parentNode] = true;
 
         for (pair<int, int> child : adj[parentNode])
         {
@@ -65,7 +72,7 @@ int main()
     // inisially distance array all value max
     for (int i = 1; i <= nodes; i++)
     {
-        dis[i] = INT_MAX;
+        dis[i] = INF;
     }
 
     dijkstra(src);
@@ -75,10 +82,14 @@ int main()
     //     cout << dis[i] << " ";
     // }
 
+
+    if(vis[nodes] != true){
+        cout << -1 << endl;
+        return 0;
+    }
+
     // path printing
-
     int current = nodes;
-
     // to store path
     vector<int> path;
 
@@ -102,3 +113,10 @@ int main()
 
     return 0;
 }
+
+// this problem solution:: https://codeforces.com/problemset/problem/20/c
+// I learn
+// ------------
+// 1. dijkstra algorithm without using cmp class
+// 2. path printing 
+// 3. if there is no path then print -1
