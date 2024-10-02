@@ -9,6 +9,9 @@ vector<pair<int, int>> adj[100005];
 // distance array
 int dis[100005];
 
+// track children parent
+int parent[100005];
+
 void dijkstra(int src)
 {
 
@@ -16,13 +19,14 @@ void dijkstra(int src)
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     pq.push({dis[src], src});
     dis[src] = 0;
+    parent[src] = 0;
 
     while (!pq.empty())
     {
-        pair<int, int> parent = pq.top();
+        pair<int, int> par = pq.top();
         pq.pop();
-        int parentCost = parent.first;
-        int parentNode = parent.second;
+        int parentCost = par.first;
+        int parentNode = par.second;
 
         for (pair<int, int> child : adj[parentNode])
         {
@@ -36,6 +40,9 @@ void dijkstra(int src)
             {
                 dis[childNode] = dis[parentNode] + childCost;
                 pq.push({dis[childNode], childNode});
+
+                // childNode parent is parentNode
+                parent[childNode] = parentNode;
             }
         }
     }
@@ -63,9 +70,34 @@ int main()
 
     dijkstra(src);
 
-    for (int i = 1; i <= nodes; i++)
+    // for (int i = 1; i <= nodes; i++)
+    // {
+    //     cout << dis[i] << " ";
+    // }
+
+    // path printing
+
+    int current = nodes;
+
+    // to store path
+    vector<int> path;
+
+    while (true)
     {
-        cout << dis[i] << " ";
+        path.push_back(current);
+
+        if (current == src)
+        {
+            break;
+        }
+        current = parent[current];
+    }
+
+    reverse(path.begin(), path.end());
+
+    for (auto x : path)
+    {
+        cout << x << " ";
     }
 
     return 0;
