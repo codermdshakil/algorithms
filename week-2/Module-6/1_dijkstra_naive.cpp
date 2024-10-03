@@ -9,6 +9,8 @@ vector<pair<int, int>> v[N];
 // distance array to store distance
 int dis[N];
 
+// dijkstra naive 
+// Time complexity of Dijkstra Naive version - O(V*E)
 void dijkstra(int src)
 {
     queue<pair<int, int>> q;
@@ -23,6 +25,7 @@ void dijkstra(int src)
         int parentNode = parent.first;
         int parentCost = parent.second;
 
+        // get childrent from parent 
         for (pair<int, int> child : v[parentNode])
         {
             int childNode = child.first;
@@ -32,7 +35,7 @@ void dijkstra(int src)
             {
                 // path relax
                 dis[childNode] = parentCost + childCost;
-                q.push({childNode, dis[childNode]});
+                q.push({childNode, dis[childNode]}); // push children to queue with distance
             }
         }
     }
@@ -68,4 +71,4 @@ int main()
     return 0;
 }
 
-// Time complexity of Dijkstra Naive version - O(V*E)
+
