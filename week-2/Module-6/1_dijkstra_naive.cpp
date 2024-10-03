@@ -11,7 +11,7 @@ int dis[N];
 
 // dijkstra naive 
 // Time complexity of Dijkstra Naive version - O(V*E)
-void dijkstra(int src)
+void dijkstra_obtimaized(int src)
 {
     queue<pair<int, int>> q;
     q.push({src, 0});
@@ -61,7 +61,7 @@ int main()
         dis[i] = INT_MAX;
     }
 
-    dijkstra(0);
+    dijkstra_obtimaized(0);
 
     for (int i = 0; i < n; i++)
     {

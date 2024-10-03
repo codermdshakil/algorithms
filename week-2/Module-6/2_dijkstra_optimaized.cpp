@@ -20,7 +20,9 @@ public:
     }
 };
 
-void dijkstra(int src)
+// Dijkstra Obtimaized version
+// time complexity - O(V+E) * log v  or  (ElogV);
+void dijkstra_obtimaized(int src)
 {
     priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> pq;
     pq.push({src, 0});
@@ -34,6 +36,7 @@ void dijkstra(int src)
         int parentNode = parent.first;
         int parentCost = parent.second;
 
+        // get childrens from parent
         for (pair<int, int> child : v[parentNode])
         {
             int childNode = child.first;
@@ -43,7 +46,7 @@ void dijkstra(int src)
             {
                 // path relax
                 dis[childNode] = parentCost + childCost;
-                pq.push({childNode, dis[childNode]});
+                pq.push({childNode, dis[childNode]}); // push children to queue
             }
         }
     }
@@ -70,7 +73,7 @@ int main()
     }
  
 
-    dijkstra(0);
+    dijkstra_obtimaized(0);
 
     for (int i = 0; i < n; i++)
     {
