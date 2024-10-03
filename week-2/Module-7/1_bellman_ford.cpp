@@ -32,6 +32,7 @@ int main()
         int u, v, c;
         cin >> u >> v >> c;
         edgeList.push_back(Edge(u, v, c));
+        // edgeList.push_back(Edge(v, u, c)); // use this line for underected graph
     }
 
     // print edges and cost for checking
@@ -64,7 +65,7 @@ int main()
     }
 
     // Time Complexity Of Bellman Ford = O(V*E);
-    
+
     // print output
     for (int i = 0; i < n; i++)
     {
