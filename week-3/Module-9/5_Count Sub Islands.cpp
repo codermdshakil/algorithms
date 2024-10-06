@@ -1,14 +1,19 @@
 // https://leetcode.com/problems/count-sub-islands/
 
-class Solution {
+class Solution
+{
 public:
     int n, m;
-        int ans = 0;
+    int ans = 0;
     bool vis[505][505];
-    bool valid(int ci, int cj) {
-        if (ci >= 0 && ci < n && cj >= 0 && cj < m) {
+    bool valid(int ci, int cj)
+    {
+        if (ci >= 0 && ci < n && cj >= 0 && cj < m)
+        {
             return true;
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
@@ -16,49 +21,55 @@ public:
 
     bool flag;
 
-
-    void dfs(int si, int sj, vector<vector<int>>& grid1,
-             vector<vector<int>>& grid2) {
+    void dfs(int si, int sj, vector<vector<int>> &grid1, vector<vector<int>> &grid2)
+    {
 
         vis[si][sj] = true;
 
-        if (grid1[si][sj] == 0) {
+        if (grid1[si][sj] == 0)
+        {
             flag = false;
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
 
             int ci = si + d[i].first;
             int cj = sj + d[i].second;
 
             if (valid(ci, cj) && !vis[ci][cj] &&
-                grid2[ci][cj] == 1) {
+                grid2[ci][cj] == 1)
+            {
 
                 dfs(ci, cj, grid1, grid2);
             }
         }
     }
 
-    int countSubIslands(vector<vector<int>>& grid1,
-                        vector<vector<int>>& grid2) {
+    int countSubIslands(vector<vector<int>> &grid1, vector<vector<int>> &grid2)
+    {
 
         memset(vis, false, sizeof(vis));
 
         n = grid2.size();
         m = grid2[0].size();
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (!vis[i][j] && grid2[i][j] == 1) {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+            {
+                if (!vis[i][j] && grid2[i][j] == 1)
+                {
                     flag = true;
                     dfs(i, j, grid1, grid2);
-                    if (flag == true) {
+                    if (flag == true)
+                    {
                         ans++;
                     }
                 }
             }
         }
+
         return ans;
     }
 };
-
