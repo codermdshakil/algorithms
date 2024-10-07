@@ -16,14 +16,20 @@ void dsu_inisialize(int n)
     par[2] = 1;
 }
 
-// find who is leader and return leader
+// find who is leader and return leader 
+// time Complexity - O(logN) better then O(N)
+
 int find(int node)
 {
     if (par[node] == -1)
     {
         return node;
     }
-    return find(par[node]);
+
+    // Path compression 
+    int leader = find(par[node]);
+    par[node] = leader;
+    return leader;
 }
 
 int main()
