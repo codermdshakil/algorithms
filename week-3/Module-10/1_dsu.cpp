@@ -19,7 +19,7 @@ void dsu_inisialize(int n)
 // find who is leader and return leader 
 // time Complexity - O(logN) better then O(N)
 
-int find(int node)
+int dsu_find(int node)
 {
     if (par[node] == -1)
     {
@@ -27,7 +27,7 @@ int find(int node)
     }
 
     // Path compression 
-    int leader = find(par[node]);
+    int leader = dsu_find(par[node]);
     par[node] = leader;
     return leader;
 }
@@ -35,10 +35,10 @@ int find(int node)
 int main()
 {
     dsu_inisialize(4);
-    cout << find(0) << endl;
-    cout << find(1) << endl;
-    cout << find(2) << endl;
-    cout << find(3) << endl;
+    cout << dsu_find(0) << endl;
+    cout << dsu_find(1) << endl;
+    cout << dsu_find(2) << endl;
+    cout << dsu_find(3) << endl;
 
     return 0;
 }
