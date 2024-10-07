@@ -75,3 +75,5 @@ int main()
 
     return 0;
 }
+
+// time complexity of Path compression and union by size is - 4
