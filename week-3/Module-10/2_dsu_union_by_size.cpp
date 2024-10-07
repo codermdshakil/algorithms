@@ -34,14 +34,6 @@ int dsu_find(int node)
     return leader;
 }
 
-void dsu_union(int node1, int node2)
-{
-    int leaderA = dsu_find(node1); // 3
-    int leaderB = dsu_find(node2); // 7
-
-    // leaderA sacrifice his leaderness and leaderA parent is leaderB. Altemately both node leader is leaderB
-    par[leaderA] = leaderB;
-}
 
 // Union by size
 void dsu_union_by_size(int node1, int node2)
