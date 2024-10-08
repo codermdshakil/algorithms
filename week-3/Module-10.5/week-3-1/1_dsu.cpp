@@ -53,14 +53,14 @@ void Union_by_level(int node1, int node2)
     }
     else
     {
-        parent[leaderA] = leaderB;
-        level[leaderB]++; // increase level size one
+        parent[leaderB] = leaderA;
+        level[leaderA]++; // increase level size one
     }
 }
 
 int main()
 {
-    inisialize(5);
+    inisialize(7);
 
     // Union(1, 2);
     // Union(3, 4);
@@ -70,12 +70,18 @@ int main()
     // cout << dsu_find(2) << endl;
     // cout << dsu_find(4) << endl;
 
+    Union_by_level(6, 7);
+    Union_by_level(5, 6);
     Union_by_level(4, 5);
     Union_by_level(3, 4);
     Union_by_level(2, 3);
     Union_by_level(1, 2);
 
     cout << "+++++++++++++++++++++++++++" << endl;
+    cout << dsu_find(7) << endl;
+    cout << "############################" << endl;
+    cout << dsu_find(6) << endl;
+    cout << "############################" << endl;
     cout << dsu_find(5) << endl;
     cout << "############################" << endl;
     cout << dsu_find(4) << endl;
