@@ -44,16 +44,19 @@ void dsu_union_by_level(int node1, int node2)
     // small level will be sacrifice
     if (level[leaderA] > level[leaderB])
     {
+        // small group leader is big group
         par[leaderB] = leaderA;
         // dont increase level
     }
     else if (level[leaderB] > level[leaderA])
     {
+        // small group leader is big group
         par[leaderA] = leaderB;
         // dont increase level
     }
     else{
-        // that means equal
+        // both group are same then
+        // that means equal 
         par[leaderA] = leaderB;
         level[leaderB]++; // increase level one
     }
