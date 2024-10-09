@@ -53,6 +53,41 @@ void dsu_union_by_size(int node1, int node2)
 
 int main()
 {
+    int n, e;
+    cin >> n >> e;
+
+    // callded dsu initialize function for inisialize
+    dsu_initialize(n);
+    bool cycle = false;
+
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        int leaderA = dsu_find(a);
+        int leaderB = dsu_find(b);
+
+        // leaderA and leaderB is Equal that means here is cycle
+        if (leaderA == leaderB)
+        {
+            cycle = true;
+        }
+        else
+        {
+            dsu_union_by_size(a, b);
+        }
+    }
+
+    // print result
+    
+    if (cycle)
+    {
+        cout << "Cycle Found" << endl;
+    }
+    else
+    {
+        cout << "Cycle Not Found" << endl;
+    }
 
     return 0;
 }
