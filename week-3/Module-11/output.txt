@@ -1,1 +1,1 @@
-Cycle Found
+Minimum total cost : 12
