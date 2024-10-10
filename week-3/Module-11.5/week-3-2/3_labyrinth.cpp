@@ -3,10 +3,10 @@ using namespace std;
 
 int n, m;
 vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
-bool visit[20][20];
-int dis[20][20];
-char grid[20][20];
-pair<int, int> parent[20][20];
+bool visit[1005][1005];
+int dis[1005][1005];
+char grid[1005][1005];
+pair<int, int> parent[1005][1005];
 
 bool valid(int ci, int cj)
 {
