@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int n = 10005;
+const int n = 100005;
 int par[n];
 int sz[n];
 int cmp, mx;
