@@ -1,1 +1,1 @@
-Minimum total cost : 20
+1 4 3 5 
