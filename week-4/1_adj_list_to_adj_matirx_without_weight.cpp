@@ -7,8 +7,6 @@ void convert_adjList_to_adjMatrix(int n, vector<int> adj[])
     int adj_matrix[n][n];
 
     // inisial all value 0
-    memset(adj_matrix, 0, sizeof(adj_matrix));
-
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
@@ -16,6 +14,10 @@ void convert_adjList_to_adjMatrix(int n, vector<int> adj[])
             if (i == j)
             {
                 adj_matrix[i][j] = 1;
+            }
+            else
+            {
+                adj_matrix[i][j] = 0;
             }
         }
     }
