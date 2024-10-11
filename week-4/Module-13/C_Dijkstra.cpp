@@ -62,14 +62,17 @@ int main()
         v[b].push_back({a, c});
     }
 
+
     for (int i = 1; i <= n; i++)
     {
         dis[i] = 1e18;
         parents[i] = -1;
     }
 
+    // called dijkstra
     dijkstra(1);
 
+    // if distance is infinite then print -1
     if (dis[n] == 1e18)
     {
         cout << -1 << endl;
