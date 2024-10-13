@@ -38,6 +38,7 @@ int main()
     return 0;
 }
 //  dp - recursion + memoization
+// time complexity - O(N)
 // Steps
 // 1. create a dp array
 // 2. initialaize dp all values with -1
