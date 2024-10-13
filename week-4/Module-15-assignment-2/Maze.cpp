@@ -1,77 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
+const int N = 1005;
 
-char a[50][50];
-int dis[50][50];
-bool visit[50][50];
-pair<int, int> parents[50][50];
-vector<pair<int, int>> path;
 int n, m;
-vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+char grid[N][N];
+int dis[N][N];
+bool visited[N][N];
+pair<int, int> parent[N][N];
 
-// Check if the coordinates are within the grid
-bool valid(int ci, int cj)
+vector<pair<int, int>> d = {{0, 1}, {0, -1}, {-1, 0}, {1, 0}}; 
+
+bool isValid(int x, int y)
 {
-    return (ci >= 0 && ci < n && cj >= 0 && cj < m && a[ci][cj] != '#');
+    return x >= 0 && x < n && y >= 0 && y < m && (grid[x][y] == '.' || grid[x][y] == 'D');
 }
 
 void bfs(int si, int sj)
 {
-    queue<pair<int, int>> p;
-    p.push({si, sj});
-    visit[si][sj] = true;
+    queue<pair<int, int>> q;
+    q.push({si, sj});
+    visited[si][sj] = true;
     dis[si][sj] = 0;
-    parents[si][sj] = {-1, -1}; // Root has no parent
 
-    while (!p.empty())
+    while (!q.empty())
     {
-        pair<int, int> par = p.front();
-        p.pop();
+        pair<int, int> par = q.front();
+        q.pop();
+
+        int x = par.first;
+        int y = par.second;
 
         for (int i = 0; i < 4; i++)
         {
-            int ci = par.first + d[i].first;
-            int cj = par.second + d[i].second;
+            int nx = x + d[i].first;
+            int ny = y + d[i].second;
 
-            if (valid(ci, cj) && !visit[ci][cj])
+            if (isValid(nx, ny) && !visited[nx][ny])
             {
-                p.push({ci, cj});
-                visit[ci][cj] = true;
-                dis[ci][cj] = dis[par.first][par.second] + 1;
-                parents[ci][cj] = {par.first, par.second}; // Store the parent coordinates
+                q.push({nx, ny});
+                visited[nx][ny] = true;
+                dis[nx][ny] = dis[x][y] + 1;
+                parent[nx][ny] = {x, y}; 
             }
         }
     }
 }
 
-void printPath(int di, int dj)
+// replace path using X
+void markPath(int di, int dj, int si, int sj)
 {
-    // If destination has no valid path, print "No path"
-    if (!visit[di][dj])
+    int x = di, y = dj;
+    while (!(x == si && y == sj))
     {
-        cout << "No path" << endl;
-        return;
+        grid[x][y] = 'X';
+        pair<int, int> path = parent[x][y];
+        int px = path.first;
+        int py = path.second;
+        x = px;
+        y = py;
     }
-
-    pair<int, int> current = {di, dj};
-
-    // Trace back from destination to source using the parent array
-    while (current != make_pair(-1, -1))
-    {
-        path.push_back(current);
-        current = parents[current.first][current.second];
-    }
-
-    // Reverse the path to get it from source to destination
-    reverse(path.begin(), path.end());
-
-    // // Print the path
-    // cout << "Path from source to destination:" << endl;
-    // for (auto p : path)
-    // {
-    //     cout << "(" << p.first << ", " << p.second << ")" << " ";
-    // }
-    // cout << endl;
+    grid[si][sj] = 'R';
+    grid[di][dj] = 'D';
 }
 
 int main()
@@ -79,18 +68,17 @@ int main()
     cin >> n >> m;
     int si, sj, di, dj;
 
-    // Input the matrix and store the source 'R' and destination 'D'
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            cin >> a[i][j];
-            if (a[i][j] == 'R')
+            cin >> grid[i][j];
+            if (grid[i][j] == 'R')
             {
                 si = i;
                 sj = j;
             }
-            if (a[i][j] == 'D')
+            if (grid[i][j] == 'D')
             {
                 di = i;
                 dj = j;
@@ -98,31 +86,24 @@ int main()
         }
     }
 
-    memset(visit, false, sizeof(visit));
     memset(dis, -1, sizeof(dis));
+    memset(visited, false, sizeof(visited));
+    memset(parent, -1, sizeof(parent));
 
+    // bfs traversal
     bfs(si, sj);
-    printPath(di, dj);
 
-    for (int i = 0; i < n; i++)
+    if (visited[di][dj])
     {
-        for (int j = 0; j < m; j++)
-        {
-            for (auto p : path)
-            {
-                if (p.first == i && p.second == j)
-                {
-                    a[i][j] = 'X';
-                }
-            }
-        }
+        markPath(di, dj, si, sj);
     }
 
+    // print output 
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
         {
-            cout << a[i][j] << "";
+            cout << grid[i][j];
         }
         cout << endl;
     }
