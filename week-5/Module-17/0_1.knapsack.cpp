@@ -5,15 +5,15 @@ using namespace std;
 int knapsack(int n, int weight[], int value[], int W)
 {
     // base case
-    if (n < 0 || W == 0)
+    if (n == 0 || W == 0)
         return 0;
 
-    if (weight[n] <= W)
+    if (weight[n-1] <= W)
     {
         // doita option
         // 1. niye dekhbo
         // 2 na niye dekhbo
-        int op1 = knapsack(n - 1, weight, value, W - weight[n]) + value[n];
+        int op1 = knapsack(n - 1, weight, value, W - weight[n-1]) + value[n-1];
         int op2 = knapsack(n - 1, weight, value, W);
         return max(op1, op2);
     }
@@ -50,7 +50,7 @@ int main()
     cin >> W;
 
     // n-1 means last index ta dise
-    cout << knapsack(n - 1, weight, value, W) << endl;
+    cout << knapsack(n, weight, value, W) << endl;
 
     return 0;
 }
