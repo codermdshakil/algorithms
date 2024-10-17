@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// implement DP
+int dp[1005][1005];
+
 bool subset_sum(int n, int sum, int arr[])
 {
     // Base Case
@@ -16,17 +19,25 @@ bool subset_sum(int n, int sum, int arr[])
         }
     }
 
+    // dp here 
+    // n and sum value can change that's why we use just n and sum
+    if(dp[n][sum] != -1){
+        return dp[n][sum];
+    }
+
     if (arr[n - 1] <= sum)
     {
         // option doita
         bool op1 = subset_sum(n - 1, sum - arr[n - 1], arr);
         bool op2 = subset_sum(n - 1, sum, arr);
-        return op1 || op2;
+        
+        // memoization
+        return  dp[n][sum] = op1 || op2;
     }
     else
     {
         // ektai option
-        return subset_sum(n - 1, sum, arr);
+        return  dp[n][sum] = subset_sum(n - 1, sum, arr);
     }
 }
 
@@ -47,6 +58,9 @@ int main()
     // take sum input
     int sum;
     cin >> sum;
+
+    // inisial dp value is -1
+    memset(dp, -1, sizeof(dp));
 
     if (subset_sum(n, sum, arr))
     {
