@@ -2,42 +2,43 @@
 using namespace std;
 
 // implement DP
-bool dp[1005][1005];
+int dp[1005][1005];
 
-bool subset_sum(int n, int sum, int arr[])
+int count_subset_sum(int n, int sum, int arr[])
 {
     // Base Case
     if (n == 0)
     {
         if (sum == 0)
         {
-            return true;
+            return 1;
         }
         else
         {
-            return false;
+            return 0;
         }
     }
 
-    // dp here 
+    // dp here
     // n and sum value can change that's why we use just n and sum
-    if(dp[n][sum] != -1){
+    if (dp[n][sum] != -1)
+    {
         return dp[n][sum];
     }
 
     if (arr[n - 1] <= sum)
     {
         // option doita
-        bool op1 = subset_sum(n - 1, sum - arr[n - 1], arr);
-        bool op2 = subset_sum(n - 1, sum, arr);
-        
+        int op1 = count_subset_sum(n - 1, sum - arr[n - 1], arr);
+        int op2 = count_subset_sum(n - 1, sum, arr);
+
         // memoization
-        return  dp[n][sum] = op1 || op2;
+        return dp[n][sum] = op1 + op2;
     }
     else
     {
         // ektai option
-        return  dp[n][sum] = subset_sum(n - 1, sum, arr);
+        return dp[n][sum] = count_subset_sum(n - 1, sum, arr);
     }
 }
 
@@ -62,14 +63,16 @@ int main()
     // inisial dp value is -1
     memset(dp, -1, sizeof(dp));
 
-    if (subset_sum(n, sum, arr))
-    {
-        cout << "YES\n";
-    }
-    else
-    {
-        cout << "NO\n";
-    }
+    // print count of subset sum
+    cout << count_subset_sum(n, sum, arr) << endl;
 
     return 0;
-}
+} 
+
+// summary
+// কত ভাবে input a দাওয়া sum  বানানু যায়
+// 4 3 = 7
+// 5 2 = 7
+// 1 2 4 = 7
+// 6 1 = 7
+// total 4 ways we can make 7
