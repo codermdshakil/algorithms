@@ -49,13 +49,32 @@ int main()
         }
     }
 
-    if (dp[n][sum])
+    // if (dp[n][sum])
+    // {
+    //     cout << "YES\n";
+    // }
+    // else
+    // {
+    //     cout << "NO\n";
+    // }
+
+
+    // কোন value দিয়ে  কি কি value বানানু Possible তার list . যদি true হয় তার মানে Possible যদি false হয় possible না 
+
+    for (int i = 0; i <= n; i++)
     {
-        cout << "YES\n";
-    }
-    else
-    {
-        cout << "NO\n";
+        for (int j = 0; j <= sum; j++)
+        {
+            if (dp[i][j])
+            {
+                cout << "T ";
+            }
+            else
+            {
+                cout << "F ";
+            }
+        }
+        cout << endl;
     }
 
     return 0;
