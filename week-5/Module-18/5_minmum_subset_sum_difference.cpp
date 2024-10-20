@@ -36,7 +36,7 @@ int main()
     }
 
     // take s1 value
-    vector<int> s1;
+    vector<int> v;
 
     // print output
     for (int i = 0; i <= n; i++)
@@ -46,10 +46,20 @@ int main()
             if (dp[i][j] == 1)
             {
                 // push dp value
-                s1.push_back(j);
+                v.push_back(j);
             }
         }
     }
+
+    // take s1 and s2 difference and minimum  sum
+    int ans = INT_MAX;
+    for(int val:v){
+        int s1 = val;
+        int s2 = s - s1;
+        ans = min(ans, abs(s1-s2));
+    }
+
+    cout << ans << endl;
 
     return 0;
 }
