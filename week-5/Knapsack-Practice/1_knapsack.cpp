@@ -4,15 +4,15 @@ using namespace std;
 int knapsack(int n, int weight[], int value[], int W)
 {
     // basecase
-    if (n < 0 || W == 0)
+    if (n == 0 || W == 0)
     {
         return 0;
     }
 
-    if (weight[n] <= W)
+    if (weight[n-1] <= W)
     {
         // two option
-        int op1 = knapsack(n - 1, weight, value, W - weight[n]) + value[n];
+        int op1 = knapsack(n - 1, weight, value, W - weight[n-1]) + value[n-1];
         int op2 = knapsack(n - 1, weight, value, W);
         return max(op1, op2);
     }
@@ -43,7 +43,7 @@ int main()
     int W;
     cin >> W;
 
-    cout << knapsack(n - 1, weight, value, W);
+    cout << knapsack(n, weight, value, W);
 
     return 0;
 }
