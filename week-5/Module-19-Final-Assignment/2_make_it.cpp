@@ -1,40 +1,35 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long int ll;
 
-// implement BFS with set
-bool canReach(ll input_value)
+bool canReach(int X)
 {
-    queue<ll> q;
-    // use set don't work for same number
-    set<ll> vis;
+    queue<int> q;
+    unordered_set<int> visited;
 
     q.push(1);
-    vis.insert(1);
+    visited.insert(1);
 
+    // BFS loop
     while (!q.empty())
     {
-        ll current_value = q.front();
+        int current = q.front();
         q.pop();
 
-        if (current_value == input_value)
+        if (current == X)
         {
             return true;
         }
 
-        ll first = current_value + 3;
-        ll second = current_value * 2;
-
-        if (first <= input_value && vis.find(first) == vis.end())
+        if (current + 3 <= X && visited.find(current + 3) == visited.end())
         {
-            q.push(first);
-            vis.insert(first);
+            q.push(current + 3);
+            visited.insert(current + 3);
         }
 
-        if (second <= input_value && vis.find(second) == vis.end())
+        if (current * 2 <= X && visited.find(current * 2) == visited.end())
         {
-            q.push(second);
-            vis.insert(second);
+            q.push(current * 2);
+            visited.insert(current * 2);
         }
     }
 
@@ -43,16 +38,15 @@ bool canReach(ll input_value)
 
 int main()
 {
-    // testcase
     int t;
     cin >> t;
     while (t--)
     {
-        // take input value
-        ll input;
-        cin >> input;
-        bool flag = canReach(input);
-        if (flag)
+        int X;
+        cin >> X;
+
+        // call can reach cundtion 
+        if (canReach(X))
         {
             cout << "YES\n";
         }
